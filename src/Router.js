@@ -6,6 +6,8 @@ import Coverpage from "./pages/coverpage/Coverpage";
 import Mypage from "./pages/mypage/Mypage";
 import Posting from "./pages/posting/Posting";
 import Postpage from "./pages/postpage/Postpage";
+
+import Header from "./components/header/index";
 const Router = () => {
     return (
         <BrowserRouter>
@@ -16,7 +18,6 @@ const Router = () => {
                 <Route exact path="/coverpage" element={<Coverpage />} />
                 <Route exact path="/posting" element={<Posting />} />
                 <Route exact path="/postpage" element={<Postpage />} />
-
             </Routes>
         </BrowserRouter>
     );
