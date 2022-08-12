@@ -6,8 +6,8 @@
 
 ## coding convention
 
-변수 선언: underscore
-ex) `let is_done;` `const check_auth;`
+변수 선언: camel case
+ex) `let isDone;` `const checkAuth;`
 
 함수 선언: arrow function
 ex) `const foo = () => {};`
