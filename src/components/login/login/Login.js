@@ -1,7 +1,7 @@
 import React from "react";
 import { MainWarp, ButtonGroup } from "./style"
 
-const Login = () => {
+const Login = ({ setSignIn }) => {
     return (
         <MainWarp>
             <h1>- 회원 가입 -</h1>
@@ -20,7 +20,7 @@ const Login = () => {
             </div>
             <ButtonGroup>
                 <button>로그인 하기</button>
-                <button>회원 가입</button>
+                <button onClick={setSignIn(true)}>회원 가입</button>
                 <button>홈으로</button>
             </ButtonGroup>
 

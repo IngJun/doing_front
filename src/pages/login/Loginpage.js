@@ -6,12 +6,12 @@ import { MainWarp } from "./style";
 import { useState } from "react";
 const Loginpage = () => {
 
-    const isSignIn = useState(false);
+    const [isSignIn, setSignIn] = useState(false);
     return (
         <div>
             <Header />
             <MainWarp>
-                {isSignIn ? <Login /> : <Signin />}
+                {isSignIn ? <Login setSignIn={setSignIn} /> : <Signin setSignIn={setSignIn} />}
             </MainWarp>
         </div>
     );
