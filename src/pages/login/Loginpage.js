@@ -13,9 +13,9 @@ const Loginpage = () => {
     return (
         <div>
             <Header />
-            <MainWarp>
-                {!isSignIn ? <Login clickbtn={clickbtn} /> : <Signin clickbtn={clickbtn} />}
-            </MainWarp>
+
+            {!isSignIn ? <Login clickbtn={clickbtn} /> : <Signin clickbtn={clickbtn} />}
+
         </div>
     );
 }

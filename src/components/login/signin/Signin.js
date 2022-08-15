@@ -1,39 +1,49 @@
 import React from "react";
-import { MainWarp } from "./style"
+import { FormControlLabel, TextField, Checkbox, Button, Typography, Avatar, Container, Box, Grid } from "@mui/material";
+import { Lock } from "@mui/icons-material";
+import { useState } from "react";
 const Signin = ({ clickbtn }) => {
 
+    const [userInfo, setUserInfo] = useState({
+        id: "",
+        password: "",
+    });
+
+    const onChangeHandler = (e) => {
+        setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
+    }
+
+    const checkID = () => {
+        if (userInfo.id === "") { alert("아이디를 입력하세요!") }
+        else {
+            alert(`${userInfo.id}는 사용가능한 아이디입니다.`);
+        }
+    }
+
+
     return (
-        <MainWarp>
-            <h1>-회원가입-</h1>
-            <div>
-                <label>I   D :
-                    <input type="text" />
-                </label>
-                <button>확인</button>
-                <p>사용할 수 있는 아이디입니다.</p>
-            </div>
-            <div>
-                <label>PW :
-                    <input type="password" />
-                </label>
-                <p>사용 가능한 비밀번호 입니다.</p>
-            </div>
-            <div>
-                <label>PW :
-                    <input type="password" />
-                </label>
-                <p>비밀 번호가 일치하지 않습니다</p>
-            </div>
-            <div>
-                <label>닉네임 :
-                    <input type="text" />
-                </label>
-            </div>
-            <div>
-                <button onClick={clickbtn}>회원가입</button>
-                <button onClick={clickbtn}>취소</button>
-            </div>
-        </MainWarp>
+        <Container component="main" maxWidth="xs">
+            <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                    <Lock />
+                </Avatar>
+                <Typography component='h1' variant='h5' align="center" sx={{ mb: 2 }}>회원가입</Typography>
+
+                <Grid container spacing={3}>
+                    <Grid item xs={9}>
+                        <TextField label="ID" name="id" autoComplete="ID" required fullWidth autoFocus sx={{ mb: 2 }} onChange={onChangeHandler} />
+                    </Grid>
+                    <Grid item xs={3}>
+                        <Button type="submit" fullWidth variant="contained" color="primary" sx={{ height: "80%" }} onClick={checkID}>확인</Button>
+                    </Grid>
+                </Grid>
+                <TextField label="Password" type="password" name="password" autoComplete="current-password" sx={{ mb: 2 }} required fullWidth autoFocus onChange={onChangeHandler} />
+
+                {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember Me" /> */}
+                <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mb: 2 }} onClick={() => { alert("회원가입 정보 post") }}  >가입하기</Button>
+                <Button type="submit" fullWidth variant="contained" color="primary" onClick={clickbtn}>취소</Button>
+            </Box>
+        </Container>
     );
 }
 
