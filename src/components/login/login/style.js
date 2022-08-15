@@ -1,15 +1,11 @@
 import styled from "styled-components";
 
 export const MainWarp = styled.div`
+padding : 10px;
 display:flex;
 flex-direction : column;
-border: 2px solid black;
-justify-content:center;
-border-radius: 3px;
-gap: 50px;
-* {
-    text-align:center;
-}
+align-items:center;
+gap: 40px;
 `;
 
 export const ButtonGroup = styled.div`

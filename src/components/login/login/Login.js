@@ -1,12 +1,19 @@
 import React from "react";
 import { MainWarp, ButtonGroup } from "./style"
+import { Link, useNavigate } from "react-router-dom";
+const Login = ({ clickbtn }) => {
 
-const Login = ({ setSignIn }) => {
+    const navigate = useNavigate();
+
+    const goToHome = () => {
+        navigate('/');
+    }
+
     return (
         <MainWarp>
-            <h1>- 회원 가입 -</h1>
+            <h1>- 로그인 -</h1>
             <div>
-                <label>ID : </label>
+                <label>I D : </label>
                 <input></input>
             </div>
             <div>
@@ -20,11 +27,11 @@ const Login = ({ setSignIn }) => {
             </div>
             <ButtonGroup>
                 <button>로그인 하기</button>
-                <button onClick={setSignIn(true)}>회원 가입</button>
-                <button>홈으로</button>
+                <button onClick={clickbtn}>회원 가입</button>
+                <button onClick={goToHome}>홈으로</button>
             </ButtonGroup>
 
-        </MainWarp>
+        </MainWarp >
     );
 
 }

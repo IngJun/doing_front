@@ -7,11 +7,14 @@ import { useState } from "react";
 const Loginpage = () => {
 
     const [isSignIn, setSignIn] = useState(false);
+    const clickbtn = () => {
+        setSignIn(!isSignIn);
+    }
     return (
         <div>
             <Header />
             <MainWarp>
-                {isSignIn ? <Login setSignIn={setSignIn} /> : <Signin setSignIn={setSignIn} />}
+                {!isSignIn ? <Login clickbtn={clickbtn} /> : <Signin clickbtn={clickbtn} />}
             </MainWarp>
         </div>
     );
