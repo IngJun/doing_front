@@ -12,7 +12,7 @@ const Loginpage = () => {
     }
     return (
         <div>
-            <Header />
+
 
             {!isSignIn ? <Login clickbtn={clickbtn} /> : <Signin clickbtn={clickbtn} />}
 
