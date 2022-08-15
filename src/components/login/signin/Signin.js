@@ -5,8 +5,10 @@ import { useState } from "react";
 const Signin = ({ clickbtn }) => {
 
     const [userInfo, setUserInfo] = useState({
-        id: "",
+        username: "",
         password: "",
+        email: "",
+        nickname: ""
     });
 
     const onChangeHandler = (e) => {
@@ -17,6 +19,14 @@ const Signin = ({ clickbtn }) => {
         if (userInfo.id === "") { alert("아이디를 입력하세요!") }
         else {
             alert(`${userInfo.id}는 사용가능한 아이디입니다.`);
+        }
+    }
+
+    const PostUserInfo = () => {
+        if (userInfo.username === "" || userInfo.password === "" || userInfo.email === "" || userInfo.nickname === "") {
+            alert("정보를 올바르게 입력해주세요!!");
+        } else {
+            alert("정보를 보냅니다.");
         }
     }
 
@@ -38,9 +48,10 @@ const Signin = ({ clickbtn }) => {
                     </Grid>
                 </Grid>
                 <TextField label="Password" type="password" name="password" autoComplete="current-password" sx={{ mb: 2 }} required fullWidth autoFocus onChange={onChangeHandler} />
-
+                <TextField label="E-Mail" type="email" name="email" sx={{ mb: 2 }} required fullWidth autoFocus onChange={onChangeHandler} />
+                <TextField label="Nickname" type="text" name="nickname" sx={{ mb: 2 }} required fullWidth autoFocus onChange={onChangeHandler} />
                 {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember Me" /> */}
-                <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mb: 2 }} onClick={() => { alert("회원가입 정보 post") }}  >가입하기</Button>
+                <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mb: 2 }} onClick={PostUserInfo}  >가입하기</Button>
                 <Button type="submit" fullWidth variant="contained" color="primary" onClick={clickbtn}>취소</Button>
             </Box>
         </Container>
