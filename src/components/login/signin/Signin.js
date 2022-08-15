@@ -41,15 +41,15 @@ const Signin = ({ clickbtn }) => {
 
                 <Grid container spacing={3}>
                     <Grid item xs={9}>
-                        <TextField label="ID" name="id" autoComplete="ID" required fullWidth autoFocus sx={{ mb: 2 }} onChange={onChangeHandler} />
+                        <TextField label="ID" name="id" autoComplete="ID" placeholder="영문자 또는 숫자 6~20자" required fullWidth autoFocus sx={{ mb: 2 }} onChange={onChangeHandler} />
                     </Grid>
                     <Grid item xs={3}>
                         <Button type="submit" fullWidth variant="contained" color="primary" sx={{ height: "80%" }} onClick={checkID}>확인</Button>
                     </Grid>
                 </Grid>
-                <TextField label="Password" type="password" name="password" autoComplete="current-password" sx={{ mb: 2 }} required fullWidth autoFocus onChange={onChangeHandler} />
-                <TextField label="E-Mail" type="email" name="email" sx={{ mb: 2 }} required fullWidth autoFocus onChange={onChangeHandler} />
-                <TextField label="Nickname" type="text" name="nickname" sx={{ mb: 2 }} required fullWidth autoFocus onChange={onChangeHandler} />
+                <TextField label="Password" type="password" name="password" autoComplete="current-password" placeholder="영문/숫자/특수문자 조합 8 ~ 16자" sx={{ mb: 2 }} required fullWidth autoFocus onChange={onChangeHandler} />
+                <TextField label="E-Mail" type="email" name="email" sx={{ mb: 2 }} placeholder="이메일 형식" required fullWidth autoFocus onChange={onChangeHandler} />
+                <TextField label="Nickname" type="text" name="nickname" placeholder="한글/영어/특수문자 조합 8~16자" sx={{ mb: 2 }} required fullWidth autoFocus onChange={onChangeHandler} />
                 {/* <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember Me" /> */}
                 <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mb: 2 }} onClick={PostUserInfo}  >가입하기</Button>
                 <Button type="submit" fullWidth variant="contained" color="primary" onClick={clickbtn}>취소</Button>
