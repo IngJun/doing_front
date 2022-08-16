@@ -44,11 +44,11 @@ const Category = (props) => {
                             >
                                 {/* <Button variant="contained">Main call to action</Button>
                                 <Button variant="outlined">Secondary action</Button> */}
+                                <Pagination count={10} color="primary" />
                             </Stack>
-
                         </Container>
                     </Box>
-                    <Pagination count={10} color="primary" />
+
                     <Container sx={{ py: 8 }} maxWidth="lg">
 
                         {/* End hero unit */}

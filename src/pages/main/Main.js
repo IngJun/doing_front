@@ -5,7 +5,6 @@ import Category from "../../components/main/category";
 const Main = () => {
     return (
         <div>
-            <Header />
             <Category />
         </div >
     );

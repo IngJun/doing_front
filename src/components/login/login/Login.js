@@ -1,11 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FormControlLabel, TextField, Checkbox, Button, Typography, Avatar, Box, Container } from "@mui/material";
+import { FormControlLabel, TextField, Checkbox, Button, Typography, Avatar, Box, Container, responsiveFontSizes } from "@mui/material";
 import { useState } from "react";
 import { Lock } from "@mui/icons-material";
 import axios from "axios";
-const Login = ({ clickbtn }) => {
+import { setCookie } from "../../../auth/auth"
 
+const Login = ({ clickbtn }) => {
 
     const [userInfo, setUserInfo] = useState({
         id: "",
@@ -28,20 +29,25 @@ const Login = ({ clickbtn }) => {
             alert("아이디와 비밀번호를 입력해주세요.");
         } else {
             alert(`ID : ${userInfo.id} PW : ${userInfo.password}`);
-            //axios.get(`http://localhost:5001/users?username=${userInfo.id}&password=${userInfo.password}`).then(function (response) {
-            // axios.get("http://13.125.122.191:8080/users/signup").then(function (response) {
             axios.post('http://13.125.122.191:8080/users/login', { username: userInfo.id, password: userInfo.password }).then(function (response) {
-                console.log(response.headers);
+                console.log(response);
+
+
                 if (response.data.length == 0) {
                     alert("로그인 실패!");
                 } else {
                     alert("로그인 성공!");
                     navigate('/');
+                    // cookies.set("accessToken", response.data.accessToken, { path: "/", expires: Math.floor(Date.now() / 1000) + (60 * 60) });
+                    //createCookie("accessToken", response.data.accessToken)
+                    setCookie('accessToken', response.data.accessToken, { path: '/', maxAge: response.data.accessTokenExpireDate });
+                    setCookie('refreshToken', response.data.refreshToken, { path: '/', maxAge: response.data.accessTokenExpireDate });
                 }
+
             }).catch(function (error) {
+                console.log(error);
                 alert("없어유");
             }).then(function () {
-
             });
         }
     }

@@ -12,6 +12,7 @@ const Signin = ({ clickbtn }) => {
         nickname: ""
     });
 
+
     const onChangeHandler = (e) => {
         setUserInfo({ ...userInfo, [e.target.name]: e.target.value })
     }
@@ -19,22 +20,42 @@ const Signin = ({ clickbtn }) => {
     const checkID = () => {
         if (userInfo.id === "") { alert("아이디를 입력하세요!") }
         else {
-            alert(`${userInfo.id}는 사용가능한 아이디입니다.`);
-        }
-    }
+            // alert(`${userInfo.id}는 사용가능한 아이디입니다.`);
+            axios.post(`http://13.125.122.191:8080/users/dupcheck/username/${userInfo.username}`).then(function (response) {
+                if (response.data === true) {
+                    alert("이미 사용중인 아이디입니다.");
+                    setUserInfo({ ...userInfo.email, username: "" })
+                } else {
+                    alert("사용 가능한 아이디입니다.");
 
-    const PostUserInfo = () => {
-        if (userInfo.username === "" || userInfo.password === "" || userInfo.email === "" || userInfo.nickname === "") {
-            alert("정보를 올바르게 입력해주세요!!");
-        } else {
-            alert("정보를 보냅니다.");
-            axios.post("http://13.125.122.191:8080/users/signup", { ...userInfo }).then(function (response) {
-                console.log(response);
+                }
             }).catch(function (error) {
                 console.log(error);
             }).then(function () {
 
             });
+        }
+    }
+
+
+    const PostUserInfo = () => {
+        if (userInfo.username === "" || userInfo.password === "" || userInfo.email === "" || userInfo.nickname === "") {
+            alert("정보를 올바르게 입력해주세요!!");
+        } else {
+            axios.post("http://13.125.122.191:8080/users/signup", { ...userInfo }).then(function (response) {
+                console.log(response);
+                alert("회원가입 성공. 로그인 페이지로 이동합니다.");
+            }).catch(function (error) {
+                console.log(error);
+            }).then(function () {
+                setUserInfo({
+                    ...userInfo, username: "",
+                    password: "",
+                    email: "",
+                    nickname: ""
+                })
+            });
+            clickbtn();
         }
     }
 
@@ -49,7 +70,7 @@ const Signin = ({ clickbtn }) => {
 
                 <Grid container spacing={3}>
                     <Grid item xs={9}>
-                        <TextField label="ID" name="username" autoComplete="ID" placeholder="영문자 또는 숫자 6~20자" required fullWidth autoFocus sx={{ mb: 2 }} onChange={onChangeHandler} />
+                        <TextField label="ID" name="username" autoComplete="ID" value={userInfo.username} placeholder="영문자 또는 숫자 6~20자" required fullWidth autoFocus sx={{ mb: 2 }} onChange={onChangeHandler} />
                     </Grid>
                     <Grid item xs={3}>
                         <Button type="submit" fullWidth variant="contained" color="primary" sx={{ height: "80%" }} onClick={checkID}>확인</Button>
