@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Typography, Container, Grid, Stack, Box, Button, CardMedia, CardContent, CardActionArea, Card } from "@mui/material";
+import { Typography, Container, Grid, Stack, Box, Button, CardMedia, CardContent, CardActionArea, Card, Pagination } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
@@ -35,6 +35,7 @@ const Category = (props) => {
                             <Typography variant="h5" align="center" color="text.secondary" paragraph>
                                 오늘 당신의 하루는 어땠나요? <br />오늘의 두잉을 사람들과 공유해봅시다!
                             </Typography>
+
                             <Stack
                                 sx={{ pt: 4 }}
                                 direction="row"
@@ -44,9 +45,12 @@ const Category = (props) => {
                                 {/* <Button variant="contained">Main call to action</Button>
                                 <Button variant="outlined">Secondary action</Button> */}
                             </Stack>
+
                         </Container>
                     </Box>
+                    <Pagination count={10} color="primary" />
                     <Container sx={{ py: 8 }} maxWidth="lg">
+
                         {/* End hero unit */}
                         <Grid container spacing={4}>
                             {cards.map((card) => (
@@ -61,6 +65,7 @@ const Category = (props) => {
                                                     // 16:9
                                                     // pt: '56.25%',
                                                     pt: '75',
+
                                                 }}
                                                 image="https://source.unsplash.com/random"
                                                 alt="random"
