@@ -18,7 +18,7 @@ const MyPageWrap = (props) => {
         <>
             <EditModal />
             <Container sx={{ padding: 10, display: 'flex', justifyContent: 'center' }}>
-                <UserProfile />
+                {/* <UserProfile /> */}
             </Container>
             <FloatingBtn>
                 <Tooltip title="작성하기" placement="top" onClick={() => naviagte('/posting')}>
