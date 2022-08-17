@@ -3,6 +3,7 @@ import {
   HeaderWrapper,
   Navigator,
   NavRight,
+  NavCoverpage,
   NavMypage,
   NavLogin,
   Logo,
@@ -21,6 +22,10 @@ const Header = (props) => {
 
   const navigate = useNavigate();
 
+  const goToCoverpage = () => {
+    navigate("/coverpage");
+  };
+
   const goToMyPage = () => {
     navigate("/mypage");
   };
@@ -38,6 +43,7 @@ const Header = (props) => {
           <Logo src="logo.png" />
         </Link>
         <NavRight>
+          {isToken && <NavCoverpage onClick={goToCoverpage}>나의 두잉</NavCoverpage>}
           {isToken && <NavMypage onClick={goToMyPage}>마이페이지</NavMypage>}
           {isToken ? (
             <NavLogin

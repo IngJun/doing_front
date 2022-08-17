@@ -27,8 +27,13 @@ export const NavRight = styled.div`
   gap: 20px;
 `;
 
+export const NavCoverpage = styled.span`
+  cursor: pointer;
+`;
+
 export const NavMypage = styled.span`
   cursor: pointer;
 `;
+
 
 export const NavLogin = styled(NavMypage)``;

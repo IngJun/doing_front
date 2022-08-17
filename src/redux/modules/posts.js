@@ -15,7 +15,7 @@ const initialState = {
         { post_id: '1', id: '3', doing: 'doing example 3' },
         { post_id: '1', id: '4', doing: 'doing example 4' }
     ],
-    current_post: {},
+    current_post: [],
     current_doing: [],
 };
 

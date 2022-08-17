@@ -24,7 +24,7 @@ const Posting = (props) => {
         dispatch(createPost({title: title_ref.current.value, content: content_ref.current.value}))
         title_ref.current.value = '';
         content_ref.current.value = '';
-        navigate('/');
+        navigate('/postpage');
     }
 
     return (
@@ -41,7 +41,7 @@ const Posting = (props) => {
                 </div>
                 <ButtonGroup>
                     <Button text={<CheckIcon />} action={makeNewPost} />
-                    <Button text={<CloseIcon />} action={() => { navigate('/') }} />
+                    <Button text={<CloseIcon />} action={() => { navigate('/postpage') }} />
                 </ButtonGroup>
             </PostWrapper>
         </div>

@@ -9,15 +9,16 @@ import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 const CoverPage = (props) => {
-    const data = useSelector(state => state.posts.post_list);
+    const posts = useSelector(state => state.post_list);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    
 
     return (
         <div>
             <Form btn_text={<AddIcon />} btn_action={() => navigate('/posting')} />
 
-            {data.map((post) => {
+            {posts && posts.map((post) => {
                 return (
                     <PostWrapper key={post.id} >
                         <StyledH1 onClick={() => {

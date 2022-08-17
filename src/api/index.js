@@ -22,9 +22,9 @@ export const apis = {
 	createPost: (post_data, config) => api.post('/api/post', post_data, config),
 	deletePost: (postId) => api.delete(`/api/post/${postId}`),
 
-	// comments
-	createComment: (postId, comment) => api.post(`/api/comment/${postId}`, comment),
-	updateComment: (commentId, comment) => api.put(`/api/comment/${commentId}`, comment),
-	deleteComment: (commentId) => api.delete(`/api/comment/${commentId}`)
+	// Doing
+	createDoing: (postId, doing) => api.post(`/api/doing/${postId}`, doing),
+	updateDoing: (doingId, doing) => api.put(`/api/doing/${doingId}`, doing),
+	deleteDoing: (doingId) => api.delete(`/api/doing/${doingId}`)
 };
 
