@@ -1,21 +1,23 @@
-import { Cookies, removeCookie } from 'react-cookie'
-
-const cookies = new Cookies();
-
-
-export const setCookie = (name, value, options) => {
-    const expires = new Date();
-
-    // 년도 설정, 현재의 년도를 가져와 +10을 해서 2032가 됨
-    expires.setFullYear(expires.getFullYear() + 10);
-    출처: https://itprogramming119.tistory.com/entry/React-쿠키-값-시간-설정하는-방법 [코딩병원:티스토리]
-    return cookies.set(name, value, { ...options })
-}
-
+import Cookies from 'universal-cookie';
+// 쿠키 객체 생성
+export const cookies = new Cookies();
+// 쿠키에 저장할 때
+// export const setCookie = (name, value, exp = 5) => {
+export const setCookie = (name, value, exp) => {
+    let date = new Date();
+    date.setTime(exp);
+    // date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${value}; expires=${date.toUTCString()}`;
+    // return cookies.set(name, value, { ...option });
+};
+// 쿠키에 저장한 거 쓸 때
 export const getCookie = (name) => {
-    return cookies.get(name)
-}
-
+    return cookies.get(name, { path: '/' });
+};
+// 쿠키 지울 때
 export const deleteCookie = (name) => {
-    removeCookie(name, { path: '/' })
-}
+    // let date = new Date('2020-01-01').toUTCString();
+    // document.cookie = name + '=; expires=' + date;
+    return cookies.remove(name);
+    // setCookie(name, '', -1);
+};

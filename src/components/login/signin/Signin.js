@@ -20,7 +20,7 @@ const Signin = ({ clickbtn }) => {
     const checkID = () => {
         if (userInfo.id === "") { alert("아이디를 입력하세요!") }
         else {
-            // alert(`${userInfo.id}는 사용가능한 아이디입니다.`);
+
             axios.post(`http://13.125.122.191:8080/users/dupcheck/username/${userInfo.username}`).then(function (response) {
                 if (response.data === true) {
                     alert("이미 사용중인 아이디입니다.");
@@ -70,13 +70,13 @@ const Signin = ({ clickbtn }) => {
 
                 <Grid container spacing={3}>
                     <Grid item xs={9}>
-                        <TextField label="ID" name="username" autoComplete="ID" value={userInfo.username} placeholder="영문자 또는 숫자 6~20자" required fullWidth autoFocus sx={{ mb: 2 }} onChange={onChangeHandler} />
+                        <TextField label="ID" name="username" value={userInfo.username} placeholder="영문자 또는 숫자 6~20자" required fullWidth autoFocus sx={{ mb: 2 }} onChange={onChangeHandler} />
                     </Grid>
                     <Grid item xs={3}>
                         <Button type="submit" fullWidth variant="contained" color="primary" sx={{ height: "80%" }} onClick={checkID}>확인</Button>
                     </Grid>
                 </Grid>
-                <TextField label="Password" type="password" name="password" autoComplete="current-password" placeholder="영문/숫자/특수문자 조합 8 ~ 16자" sx={{ mb: 2 }} required fullWidth autoFocus onChange={onChangeHandler} />
+                <TextField label="Password" type="password" name="password" placeholder="영문/숫자/특수문자 조합 8 ~ 16자" sx={{ mb: 2 }} required fullWidth autoFocus onChange={onChangeHandler} />
                 <TextField label="E-Mail" type="email" name="email" sx={{ mb: 2 }} placeholder="이메일 형식" required fullWidth autoFocus onChange={onChangeHandler} />
                 <TextField label="Nickname" type="text" name="nickname" placeholder="한글/영어/특수문자 조합 8~16자" sx={{ mb: 2 }} required fullWidth autoFocus onChange={onChangeHandler} />
                 <Button type="submit" fullWidth variant="contained" color="primary" sx={{ mb: 2 }} onClick={PostUserInfo}  >가입하기</Button>

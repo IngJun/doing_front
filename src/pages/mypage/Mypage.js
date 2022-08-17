@@ -1,11 +1,11 @@
 import React from "react";
-import Header from "../../components/header";
+import MyPageWrap from "../../components/mypage";
 const MyPage = () => {
     return (
         <div>
-            <div>마이페이지 입니다.</div>
-        </div>);
+            <MyPage />
+        </div >);
 }
 
 
-export default MyPage;
+export default MyPageWrap;

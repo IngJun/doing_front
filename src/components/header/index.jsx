@@ -8,9 +8,17 @@ import {
   Logo,
 } from "./style";
 import { Link, useNavigate } from "react-router-dom";
-import { getCookie, deleteCookie } from "../../auth/auth";
+import { cookies, getCookie, deleteCookie } from "../../auth/auth";
+import { useState, useEffect } from "react";
+import Cookies from "universal-cookie";
 
 const Header = (props) => {
+  const [isToken, setToken] = useState(false);
+
+  useEffect(() => {
+    setToken(getCookie("accessToken") === undefined ? false : true);
+  });
+
   const navigate = useNavigate();
 
   const goToMyPage = () => {
@@ -30,14 +38,14 @@ const Header = (props) => {
           <Logo src="logo.png" />
         </Link>
         <NavRight>
-          {getCookie("accessToken") !== "" && (
-            <NavMypage onClick={goToMyPage}>마이페이지</NavMypage>
-          )}
-          {getCookie("accessToken") !== "" ? (
+          {isToken && <NavMypage onClick={goToMyPage}>마이페이지</NavMypage>}
+          {isToken ? (
             <NavLogin
               onClick={() => {
                 deleteCookie("accessToken");
                 deleteCookie("refreshToken");
+                alert("로그아웃 완료");
+                window.location.reload();
               }}
             >
               로그아웃

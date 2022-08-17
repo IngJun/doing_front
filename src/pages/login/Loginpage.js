@@ -12,8 +12,6 @@ const Loginpage = () => {
     }
     return (
         <div>
-
-
             {!isSignIn ? <Login clickbtn={clickbtn} /> : <Signin clickbtn={clickbtn} />}
 
         </div>
