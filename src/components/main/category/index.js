@@ -1,16 +1,54 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Typography, Container, Grid, Stack, Box, Button, CardMedia, CardContent, CardActionArea, Card, Pagination } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { getCookie } from "../../../auth/auth"
 
 const theme = createTheme();
 const nowDate = new Date().toISOString().slice(0, 10);
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+//더미 데이터
+const cards = [1, 2, 3, 4, 5, 6, 7, 8];
+
 const Category = (props) => {
 
+    const [page, setPage] = React.useState(1);
+    const handleChange = (event, value) => {
+        setPage(value);
+    };
 
+    //게시물 목록
+    const [boardList, setBoard] = useState([]);
+    const [pageNation, setPageNation] = useState({
+        idx: 0,
+        totalIdx: 0,
+    });
+
+    const accessToken = getCookie("accessToken");
+
+    useEffect(() => {
+        getBoardList(page);
+    }, [page])
+
+
+    const getBoardList = (idx = 0) => {
+        axios.get(`http://13.125.122.191:8080/boards?page=${(parseInt(page) - 1)}`)
+            .then(function (response) {
+                console.log(response);
+                setBoard(response.data.content);
+                setPageNation({ ...pageNation, idx: response.data.number, totalIdx: response.data.totalPages })
+
+
+            }).catch(function (error) {
+                console.log(error)
+            }).then(function () { });
+    }
+
+
+    const navigate = useNavigate();
     return (
         <>
             <ThemeProvider theme={theme}>
@@ -44,7 +82,7 @@ const Category = (props) => {
                             >
                                 {/* <Button variant="contained">Main call to action</Button>
                                 <Button variant="outlined">Secondary action</Button> */}
-                                <Pagination count={10} color="primary" />
+                                <Pagination count={pageNation.totalIdx} color="primary" onChange={handleChange} />
                             </Stack>
                         </Container>
                     </Box>
@@ -58,7 +96,7 @@ const Category = (props) => {
                                     <Card
                                         sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                                     >
-                                        <CardActionArea>
+                                        <CardActionArea onClick={() => { navigate(`/boards/${card}`) }}>
                                             <CardMedia
                                                 component="img"
                                                 sx={{
