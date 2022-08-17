@@ -1,8 +1,10 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Typography, Container, Grid, Stack, Box, Paper, CardMedia, CardContent, CardActionArea, Card, Pagination } from "@mui/material";
+import styled from 'styled-components';
+import { Typography, Container, Grid, Stack, Box, Paper, CardMedia, CardContent, CardActionArea, Card, Pagination, Tooltip, Fab } from "@mui/material";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
 
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -213,11 +215,23 @@ const Category = (props) => {
                         </Grid>
                     </Container>
                 </main>
+                <FloatingBtn>
+                    <Tooltip title="맨 위로" placement="top" onClick={() => { window.scrollTo(0, 0) }} >
+                        <Fab sx={{ backgroundImage: 'linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%)' }}>
+                            <KeyboardDoubleArrowUpIcon />
+                        </Fab>
+                    </Tooltip>
+                </FloatingBtn>
             </ThemeProvider>
         </>
     );
 }
 
+const FloatingBtn = styled.div`
+position:fixed;
+left: 90%;
+bottom: 10%;
+`;
 
 export default Category;
 
