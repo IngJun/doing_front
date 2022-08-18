@@ -9,6 +9,7 @@ export const postSlice = createSlice({
             {
                 id: '1',
                 title: 'post example',
+                image: '',
                 content: 'content example',
             }
         ],

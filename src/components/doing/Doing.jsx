@@ -12,7 +12,7 @@ import RateReviewIcon from '@mui/icons-material/RateReview';
 
 const Doing = ({ post_id }) => {
     const dispatch = useDispatch();
-    const doings = useSelector(state => state.doing_list);
+    const doings = useSelector(state => state.posts.doing_list);
 
     const doing_ref = useRef(null);
     const edit_ref = useRef(null);

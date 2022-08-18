@@ -8,7 +8,7 @@ const Header = ({btn_text, btn_style, btn_action}) => {
 
     return ( 
         <Wrapper >
-            <StyledH1 onClick={() =>{navigate('/');}}>Doing</StyledH1>
+            <p></p>
             <Button text={btn_text} action={btn_action}/>
         </Wrapper>
      );
@@ -29,6 +29,3 @@ const Wrapper = styled.div`
     border-radius: 10px;
 `;
 
-const StyledH1 = styled.h1`
-    cursor: pointer;
-`;

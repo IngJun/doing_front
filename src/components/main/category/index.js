@@ -105,7 +105,7 @@ const Category = (props) => {
                                                     pt: '75',
 
                                                 }}
-                                                image="https://source.unsplash.com/random"
+                                                image="https://source.unsplash.com/random/"
                                                 alt="random"
                                             />
                                             <CardContent sx={{ flexGrow: 1 }}>

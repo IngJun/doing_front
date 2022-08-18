@@ -1,22 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import Form from '../../components/form/Form';
+// import Form from '../../components/form/Form';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { deletePost } from '../../redux/modules/posts';
 import Button from '../../components/button/Button';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import Fab from '@mui/material/Fab';
+import Tooltip from '@mui/material/Tooltip';
 const CoverPage = (props) => {
-    const posts = useSelector(state => state.post_list);
+    const posts = useSelector(state => state.posts.post_list);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
 
     return (
         <div>
-            <Form btn_text={<AddIcon />} btn_action={() => navigate('/posting')} />
+            <FloatingBtn>
+                <Tooltip title="작성하기" placement="top" onClick={() => navigate('/posting')}>
+                    <Fab color="primary" aria-label="add">
+                        <AddIcon />
+                    </Fab>
+                </Tooltip>
+            </FloatingBtn>
 
             {posts && posts.map((post) => {
                 return (
@@ -34,6 +41,11 @@ const CoverPage = (props) => {
 
 export default CoverPage;
 
+const FloatingBtn = styled.div`
+position:absolute;
+left: 90%;
+bottom: 10%;
+`
 const PostWrapper = styled.div`
     box-sizing: border-box;
     display: flex;

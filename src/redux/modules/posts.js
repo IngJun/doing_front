@@ -10,9 +10,9 @@ const initialState = {
         }
     ],
     doing_list: [
-        { post_id: '1', id: '1', doing: 'doing example 1' },
-        { post_id: '1', id: '2', doing: 'doing example 2' },
-        { post_id: '1', id: '3', doing: 'doing example 3' },
+        { post_id: '1', doing_id: '1', doing: 'doing example 1' },
+        { post_id: '1', doing_id: '2', doing: 'doing example 2' },
+        { post_id: '1', doing_id: '3', doing: 'doing example 3' },
         { post_id: '1', id: '4', doing: 'doing example 4' }
     ],
     current_post: [],
@@ -83,6 +83,28 @@ export const deleteDoing = (doing_id) => {
 }
 
 //middleware actions
+export const createPostAxios = (post) => {
+	return async (dispatch, useState) => {
+			apis.createPost(post).then(
+					res => {
+						console.log(res);
+					}
+			).catch(
+					err => {
+						console.error(err);
+						const alert = async () => {
+							await window.alert(err.response.data);
+							if(err.response.status === 400){
+								window.location.href = '/';
+							}
+						}
+						alert();
+					}
+			)
+	}
+}
+
+
 export const loadPostsListAxios = (mount) => { // 전체 게시글 리스트 불러오기
 	return async (dispatch) => {
 		if(mount){

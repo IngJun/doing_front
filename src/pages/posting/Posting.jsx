@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useState } from "react";
 import styled from 'styled-components';
 import Form from '../../components/form/Form';
 import { createPost } from '../../redux/modules/posts';
@@ -8,6 +9,10 @@ import Button from '../../components/button/Button';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
+import {Card, CardMedia, IconButton } from '@mui/material';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+
+
 
 const Posting = (props) => {
     const navigate = useNavigate();
@@ -21,11 +26,19 @@ const Posting = (props) => {
             window.alert('The content is too short or title is missing');
             return;
         }
-        dispatch(createPost({title: title_ref.current.value, content: content_ref.current.value}))
+        dispatch(createPost({title: title_ref.current.value, image: fileImage, content: content_ref.current.value}))
         title_ref.current.value = '';
         content_ref.current.value = '';
         navigate('/postpage');
     }
+    //미리보기
+    const [fileImage, setFileImage] = useState("img/default_img.jpeg");
+
+    //사진 저장
+    const saveFileImage = (e) => {
+        setFileImage(URL.createObjectURL(e.target.files[0]));
+        console.log(fileImage);
+    };
 
     return (
         <div>
@@ -35,6 +48,20 @@ const Posting = (props) => {
                     <StyledLabel htmlFor='title-input'>제목</StyledLabel><br />
                     <StyledInput type="text" ref={title_ref} id='title-input' />
                 </div>
+                <div style={{ position: "relative" }}>
+                        <Card sx={{ width: "75%", height: "300px", margin: "auto"}}>
+                            <CardMedia
+                                component="img"
+                                height="300px"
+                                image={fileImage}
+                                alt={fileImage}
+                            />
+                        </Card>
+                        <IconButton sx={{ position: "absolute", bottom: "2%", right: "2%" }} color="primary" aria-label="upload picture" component="label">
+                            <input hidden accept="image/*" type="file" onChange={saveFileImage} />
+                            <PhotoCamera />
+                        </IconButton>
+                    </div>
                 <div>
                     <StyledLabel htmlFor='content-input'>내용</StyledLabel><br />
                     <StyledTextArea ref={content_ref} id='content-input' />
@@ -67,6 +94,7 @@ const StyledInput = styled.input`
     border: 1 solid #eee;
     border-radius: 10px;
     font-size: 20px;
+    margin: 20px;
 `;
 
 const StyledTextArea = styled.textarea`
@@ -78,6 +106,7 @@ const StyledTextArea = styled.textarea`
     border-radius: 10px;
     font-size: 20px;
     resize: vertical;
+    margin: 20px;
 `;
 
 const ButtonGroup = styled.div`
