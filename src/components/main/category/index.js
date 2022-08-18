@@ -107,7 +107,7 @@ const Category = (props) => {
 
 
     const getBoardList = (idx = 0) => {
-        axios.get(`http://13.125.135.102:8080/boards?page=${(parseInt(page) - 1)}`)
+        axios.get(`http://13.125.122.191:8080/boards?page=${(parseInt(page) - 1)}`)
             .then(function (response) {
                 console.log(response);
                 setBoard(response.data.content);
@@ -119,7 +119,7 @@ const Category = (props) => {
 
 
     const gotoBoard = (idx) => {
-        axios.get(`http://13.125.135.102:8080/boards/${idx}`)
+        axios.get(`http://13.125.122.191:8080/boards/${idx}`)
             .then(function (response) {
                 navigate(`/boards/${idx}`)
             }).catch(function (error) {
