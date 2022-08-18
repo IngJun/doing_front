@@ -4,15 +4,18 @@ export const HeaderWrapper = styled.header`
   width: 100%;
   height: 80px;
   display: flex;
-  border-bottom: 1px solid grey;
+  /* border-bottom: 1px solid grey; */
   justify-content: center;
+  background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+  
 `;
 
 export const Navigator = styled.div`
-  width: 1200px;
+  width: 85%;
   height: 100%;
   display: flex;
   align-items: center;
+
 `;
 
 export const Logo = styled.img`

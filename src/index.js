@@ -3,14 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
 import { CookiesProvider } from 'react-cookie';
+import {store , persistedReducer } from './redux/store';
+import { persistStore } from 'redux-persist';	// 추가
+import { PersistGate } from 'redux-persist/integration/react';	// 추가
+const persistor = persistStore(store);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <CookiesProvider>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
+    </Provider>
   </CookiesProvider>
 
 );

@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Lock } from "@mui/icons-material";
 import axios from "axios";
 import { setCookie } from "../../../auth/auth"
-import { apis } from "../../../api";
+
 
 const Login = ({ clickbtn }) => {
 
@@ -25,7 +25,6 @@ const Login = ({ clickbtn }) => {
         if (userInfo.id === "" || userInfo.password === "") {
             alert("아이디와 비밀번호를 입력해주세요.");
         } else {
-
             axios.post('http://13.125.122.191:8080/users/login', { username: userInfo.id, password: userInfo.password })
                 .then(
                     function (response) {

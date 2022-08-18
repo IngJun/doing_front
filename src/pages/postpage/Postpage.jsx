@@ -22,8 +22,8 @@ const PostPage = () => {
 
     const [postedit, setPostEdit] = useState(false);
 
-    const posts = useSelector(state => state.post_list);
-    const current_post = posts?.find(post => post.id === params.id);
+    const posts = useSelector(state => state.posts.post_list);
+    const current_post = posts.find(post => post.id === params.id);
 
     useEffect(() =>{
         dispatch(loadPosts());
