@@ -107,7 +107,7 @@ const Category = (props) => {
 
 
     const getBoardList = (idx = 0) => {
-        axios.get(`http://13.125.122.191:8080/boards?page=${(parseInt(page) - 1)}`)
+        axios.get(`http://13.125.135.102:8080/boards?page=${(parseInt(page) - 1)}`)
             .then(function (response) {
                 console.log(response);
                 setBoard(response.data.content);
@@ -117,6 +117,16 @@ const Category = (props) => {
             }).then(function () { });
     }
 
+
+    const gotoBoard = (idx) => {
+        axios.get(`http://13.125.135.102:8080/boards/${idx}`)
+            .then(function (response) {
+                navigate(`/boards/${idx}`)
+            }).catch(function (error) {
+
+            }).then(function () { });
+
+    }
 
     const navigate = useNavigate();
     return (
@@ -160,13 +170,15 @@ const Category = (props) => {
                     <Container sx={{ py: 8 }} maxWidth="lg">
                         {/* End hero unit */}
                         <Grid container spacing={4}>
-                            {cards.map((card) => (
+                            {boardList.map((card) => (
                                 <Grid item key={card.id} xs={12} sm={4} md={3}>
 
                                     <Card elevation={12}
                                         sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
                                     >
-                                        <CardActionArea onClick={() => { navigate(`/boards/${card.id}`) }}>
+                                        <CardActionArea onClick={() => {
+                                            gotoBoard(card.id);
+                                        }}>
                                             <CardMedia
                                                 component="img"
                                                 sx={{
@@ -177,21 +189,28 @@ const Category = (props) => {
                                                     height: "300px",
                                                     objectFit: 'center'
                                                 }}
-                                                image="https://source.unsplash.com/random/"
-                                                alt="random"
+
+                                                // image="https://source.unsplash.com/random"
+                                                image={true ? "https://source.unsplash.com/random" : "img/default_img.jpeg"}
+                                                alt="img/default_img.jpeg"
+
                                             />
                                             <CardContent sx={{ flexGrow: 1 }}>
-                                                <Typography gutterBottom variant="body2" component="h5" style={{ color: "gray" }}>
-                                                    {card.createdAt.slice(0, 10)}
-                                                </Typography >
-                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-
-                                                    <Typography gutterBottom variant="h5" component="h2">
+                                                <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                                                    <Typography gutterBottom variant="body2" component="h5" style={{ color: "gray" }}>
+                                                        {card.createdAt.slice(0, 10)}
+                                                    </Typography >
+                                                    <Typography gutterBottom variant="body2" component="h5" style={{ color: "gray" }}>
                                                         {card.authorName}
+                                                    </Typography >
+                                                </div>
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                    <Typography gutterBottom variant="h5" component="h2">
+                                                        {card.boardTitle}
                                                     </Typography >
                                                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                                                         <VisibilityIcon sx={{ width: '15px', color: '#464646' }} />
-                                                        <div>{card.countBoradVisit}</div>
+                                                        <div>{card.countBoardVisit}</div>
                                                     </div>
 
                                                 </div>
@@ -204,7 +223,7 @@ const Category = (props) => {
                                                     overflow: 'hidden',
                                                     textOverflow: 'ellipsis'
                                                 }} >
-                                                    {card.boarderTitle}
+                                                    {card.boardContent}
                                                 </Typography>
                                             </CardContent>
                                         </CardActionArea>
@@ -228,8 +247,8 @@ const Category = (props) => {
 }
 
 const FloatingBtn = styled.div`
-position:fixed;
-left: 90%;
+position: fixed;
+left: 93%;
 bottom: 10%;
 `;
 
