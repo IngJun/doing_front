@@ -36,6 +36,10 @@ const Posting = (props) => {
                     <StyledInput type="text" ref={title_ref} id='title-input' />
                 </div>
                 <div>
+                    <StyledLabel htmlFor='image-input'>이미지</StyledLabel><br />
+                    <StyledImageArea ref={content_ref} id='image-input' />
+                </div>
+                <div>
                     <StyledLabel htmlFor='content-input'>내용</StyledLabel><br />
                     <StyledTextArea ref={content_ref} id='content-input' />
                 </div>
@@ -69,6 +73,16 @@ const StyledInput = styled.input`
     font-size: 20px;
 `;
 
+const StyledImageArea = styled.input`
+    box-sizing: border-box;
+    width: 100%;
+    padding: 30px;
+    margin: 0px;
+    border: 1 solid #eee;
+    border-radius: 10px;
+    font-size: 20px;
+`;
+
 const StyledTextArea = styled.textarea`
     box-sizing: border-box;
     width: 100%;
@@ -77,7 +91,6 @@ const StyledTextArea = styled.textarea`
     border: 1 solid #eee;
     border-radius: 10px;
     font-size: 20px;
-    resize: vertical;
 `;
 
 const ButtonGroup = styled.div`

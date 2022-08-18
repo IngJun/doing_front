@@ -49,8 +49,8 @@ const PostPage = () => {
                         <ButtonGroup>
                             <Button text={<EditIcon />} action={() => { setPostEdit(!postedit) }} />
                         </ButtonGroup>
-                        {/* <h1>{current_post.title}</h1>
-                        <StyledPre>{current_post.content}</StyledPre> */}
+                        <h1>{current_post.title}</h1>
+                        <StyledPre>{current_post.content}</StyledPre>
                     </PostWrapper>
                 </>
                 :
