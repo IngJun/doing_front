@@ -1,30 +1,29 @@
 import axios from 'axios';
 
 const api = axios.create({
-	baseURL: 'http://localhost:3000',
+	ba	baseURL: 'http://13.125.122.191:8080',
 });
 api.defaults.headers.common['Authorization'] = sessionStorage.getItem('token');
 
 
 export const apis = {
 	// user
-	signUp: (data) => api.post('/user/signup', data),
-	signIn: (data) => api.post('/user/login', data),
-	signOut: () => api.post('/user/logout'),
+	signUp: (data) => api.post('/users/signup', data),
+	signIn: (data) => api.post('/users/login', data),
+	signOut: () => api.post('/users/logout'),
 	mypage: () => api.get('/api/mypage'),
 
 
 	// post
-	postList: () => api.get('/api/postList'),	
-	postdetail: (post_id) => api.get(`/api/postdetail/${post_id}`),
-	rankingList: () => api.get('/api/ranking'),
-	updatePost: (postId, post_data, config) => api.put(`/api/post/${postId}`, post_data, config),
-	createPost: (post_data, config) => api.post('/api/post', post_data, config),
-	deletePost: (postId) => api.delete(`/api/post/${postId}`),
+	postList: () => api.get('/api/boards'),	
+	postdetail: (boardid) => api.get(`/api/boards/${boardid}`),
+	//post_data = = {title: '', image: '', content: ''}
+	updatePost: (boardid, post_data) => api.put(`/api/boards/${boardid}`, post_data),
+	createPost: (post_data) => api.post('/api/boards/form', post_data),
+	deletePost: (boardid) => api.delete(`/api/boards/${boardid}`),
 
 	// Doing
-	createDoing: (postId, doing) => api.post(`/api/doing/${postId}`, doing),
-	updateDoing: (doingId, doing) => api.put(`/api/doing/${doingId}`, doing),
-	deleteDoing: (doingId) => api.delete(`/api/doing/${doingId}`)
-};
-
+	//doing_data = {content: ''}
+	createDoing: (boardid, doing_data) => api.post(`/api/boards/${boardid}/posts`, doing_data),
+	updateDoing: (boardid, doingId, doing_data) => api.put(`api/boards/${boardid}/posts/${doingId}`, doing_data),
+	deleteDoing: (boardid, doingId) => api.delete(`api/boards/${boardid}/posts/${doingId}`)
