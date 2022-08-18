@@ -41,17 +41,29 @@ export default function EditModal() {
     const [userInfo, setUserInfo] = useState({
         nickname: "",
         introduce: "",
+        profile_img: "",
     });
 
-    const [value, setValue] = React.useState('Controlled');
+    console.log(userInfo);
+
+    const PostUserInfo = () => {
+        const UpdateData = new FormData();
+        UpdateData.append("nickname", userInfo.nickname);
+        UpdateData.append("introduce", userInfo.introduce);
+        UpdateData.append("file", userInfo.profile_img);
+
+        console.log(UpdateData.get('file'));
+
+        // axios.post()
+    }
 
     const handleChange = (event) => {
-        setValue(event.target.value);
+        setUserInfo({ ...userInfo, [event.target.name]: event.target.value, profile_img: fileImage });
     };
 
     return (
         <div>
-            <Button onClick={handleOpen}>Open modal</Button>
+            <Button onClick={handleOpen} style={{ position: "absolute", right: "18%", top: "20%" }}>프로필 수정</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -76,9 +88,8 @@ export default function EditModal() {
                             <PhotoCamera />
                         </IconButton>
                     </div>
-                    <TextField id="outlined-basic" label="닉네임" variant="outlined" />
-
-                    <TextField
+                    <TextField id="outlined-basic" name="nickname" label="닉네임" variant="outlined" onChange={handleChange} />
+                    <TextField name="introduce"
                         id="filled-multiline-static"
                         label="소개글"
                         multiline
@@ -86,11 +97,9 @@ export default function EditModal() {
                         onChange={handleChange}
                         variant="filled"
                     />
-                    <Button variant="contained" component="label">
+                    <Button variant="contained" component="label" onClick={PostUserInfo}>
                         업데이트
                     </Button>
-
-
                 </Box>
             </Modal>
         </div>
